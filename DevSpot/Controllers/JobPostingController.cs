@@ -1,5 +1,6 @@
 ﻿using DevSpot.Models;
 using DevSpot.Repositories;
+using DevSpot.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,18 +31,22 @@ namespace DevSpot.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(JobPosting jobPosting)
+        public async Task<IActionResult> Create(JobPostingViewModel jobPostingVm)
         {
-
-            // load user here and id too
-            //ModelState.Remove("User");
-            //ModelState.Remove("UserId");
-
 
 
             if (ModelState.IsValid)
             {
-                jobPosting.UserId = _userManager.GetUserId(User);
+
+                var jobPosting = new JobPosting
+                {
+                    Title = jobPostingVm.Title,
+                    Description = jobPostingVm.Description,
+                    Company = jobPostingVm.Company,
+                    Location = jobPostingVm.Location,
+                    UserId = _userManager.GetUserId(User),
+                };
+                
                 await _repository.AddAsync(jobPosting);
             }
 
