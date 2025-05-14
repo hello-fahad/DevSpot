@@ -1,31 +1,32 @@
 ﻿@model DevSpot.ViewModels.JobPostingViewModel
 
 
+<h1 class="text-center display-6 fw-bold my-4">🚀 Create a Job Posting</h1>
 
-<h1>Create</h1>
+<div class="card shadow-sm border border-info border-opacity-25">
+    <div class="card-body">
+        <form method="post" action="Create">
+            <div class="form-floating mb-3">
+                <input asp-for="Title" class="form-control" placeholder="Job Title" />
+                <label asp-for="Title"></label>
+            </div>
 
-<form method="post" action="Create">
+            <div class="form-floating mb-3">
+                <textarea asp-for="Description" class="form-control" placeholder="Job Description" style="height: 120px;"></textarea>
+                <label asp-for="Description"></label>
+            </div>
 
-	<div class="mb-3">
-		<label asp-for="Title" class="form-label"></label>
-		<input type="text" asp-for="Title" class="form-control"/>
-	</div>
+            <div class="form-floating mb-3">
+                <input asp-for="Company" class="form-control" placeholder="Company Name" />
+                <label asp-for="Company"></label>
+            </div>
 
-	<div class="mb-3">
-		<label asp-for="Description" class="form-label"></label>
-		<textarea type="text" asp-for="Description" class="form-control"></textarea>
-	</div>
+            <div class="form-floating mb-3">
+                <input asp-for="Location" class="form-control" placeholder="Location" />
+                <label asp-for="Location"></label>
+            </div>
 
-	<div class="mb-3">
-		<label asp-for="Company" class="form-label"></label>
-		<input type="text" asp-for="Company" class="form-control" />
-	</div>
-
-	<div class="mb-3">
-		<label asp-for="Location" class="form-label"></label>
-		<input type="text" asp-for="Location" class="form-control" />
-	</div>
-
-	<button type="submit" class="btn btn-primary">Create</button>
-
-</form>
+            <button type="submit" class="btn btn-success w-100">✅ Submit Job</button>
+        </form>
+    </div>
+</div>
