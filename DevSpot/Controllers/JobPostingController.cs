@@ -21,12 +21,23 @@ namespace DevSpot.Controllers
             _userManager = userManager;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var jobPostings = await _repository.GetAllAsync();
-            return View(jobPostings);
+            if(User.IsInRole(Roles.Employer))
+            {
+                var allJobPostings = await _repository.GetAllAsync();
+                var userId = _userManager.GetUserId(User);
+                var filteredJobPosting = allJobPostings.Where(jp => jp.UserId == userId);
+                return View(filteredJobPosting);
+            }
+            var JobPostings = await _repository.GetAllAsync();
+
+            return View(JobPostings);
+
         }
 
+        [Authorize(Roles = "Admin, Employer")]
         public IActionResult Create()
         {
             return View();
